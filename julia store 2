@@ -1,0 +1,40 @@
+from tkinter import *
+
+class party_store_hire:
+    def __init__(self,main):
+        self.main=main
+        self.main.title("CPS")
+        self.main.geometry("400x300")
+
+        
+        name_label=Label(self.main,text="Customer name --->" )
+        name_label.grid(row=0,column=0,padx=10,pady=10, sticky=W)
+
+        Receipt_label=Label(self.main,text="Receipt number --->" )
+        Receipt_label.grid(row=1,column=0,padx=10,pady=10, sticky=W)
+        
+        item_label=Label(self.main,text="Item name          --->" )
+        item_label.grid(row=2,column=0,padx=10,pady=10, sticky=W)
+
+        amount_label=Label(self.main,text="amount               --->" )
+        amount_label.grid(row=3,column=0,padx=10,pady=10, sticky=W)
+
+        self.entry_name = Entry(main)
+        self.entry_name.grid(row=0,column=1,padx=10,pady=10, sticky=W)
+
+        self.entry_Receipt = Entry(main)
+        self.entry_Receipt.grid(row=1,column=1,padx=10,pady=10, sticky=W)
+
+        self.entry_item = Entry(main)
+        self.entry_item.grid(row=2,column=1,padx=10,pady=10, sticky=W)
+
+        self.entry_amount = Entry(main)
+        self.entry_amount.grid(row=3,column=1,padx=10,pady=10, sticky=W)
+
+
+
+        
+
+self = Tk()
+app = party_store_hire(self)
+self.mainloop()
