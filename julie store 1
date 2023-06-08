@@ -1,0 +1,11 @@
+from tkinter import *
+
+class party_store_hire:
+    def __init__(self,main):
+        self.main=main
+        self.main.title("CPS")
+        
+
+self = Tk()
+app = party_store_hire(self)
+self.mainloop()
