@@ -1,0 +1,71 @@
+from tkinter import *
+from tkinter import messagebox
+class party_store_hire:
+    def __init__(self,main):
+        self.main=main
+        self.main.title("CPS")
+        self.main.geometry("400x300")
+
+        def delete_item():
+            selected_item = self.listbox.curselection()
+
+        name_label=Label(self.main,text="Customer name --->" )
+        name_label.grid(row=0,column=0,padx=10,pady=10, sticky=W)
+
+        Receipt_label=Label(self.main,text="Receipt number --->" )
+        Receipt_label.grid(row=1,column=0,padx=10,pady=10, sticky=W)
+        
+        item_label=Label(self.main,text="Item name          --->" )
+        item_label.grid(row=2,column=0,padx=10,pady=10, sticky=W)
+
+        amount_label=Label(self.main,text="amount               --->" )
+        amount_label.grid(row=3,column=0,padx=10,pady=10, sticky=W)
+
+        self.entry_name = Entry(main)
+        self.entry_name.grid(row=0,column=1,padx=10,pady=10, sticky=W)
+
+        self.entry_Receipt = Entry(main)
+        self.entry_Receipt.grid(row=1,column=1,padx=10,pady=10, sticky=W)
+
+        self.entry_item = Entry(main)
+        self.entry_item.grid(row=2,column=1,padx=10,pady=10, sticky=W)
+
+        self.entry_amount = Entry(main)
+        self.entry_amount.grid(row=3,column=1,padx=10,pady=10, sticky=W)
+        
+        self.listbox = Listbox(self.main, width=50)
+        self.listbox.grid(row= 5, columnspan=10, padx=5, pady=5)
+
+        delete_button = Button (self.main, text="Delete item", command=delete_item)
+        delete_button.grid(row=4, column=1, padx=5, pady=5)
+
+        add_button = Button(self.main, text = "Add item", command=self.add_item)
+        add_button.grid(row=4, column= 0,padx=10, pady= 10)
+
+    def add_item(self):
+        name = self.entry_name.get()
+        receipt = self.entry_Receipt.get()
+        item = self.entry_item.get()
+        amount = self.entry_amount.get()
+
+        if name and receipt and item and amount:
+            details = f"{name}, Receipt: {receipt}, Item: {item}, Quantity: {amount}"
+            self.listbox.insert(END, details)
+        else:
+            messagebox.showerror("Error", "Please fill in all the fields.")
+
+    
+
+
+
+
+    def delete_item(self):
+        selected_item = self.listbox.curselection()
+        if selected_item:
+            self.listbox.delete(selected_item)
+        else:
+            messagebox.showerror("Error", "Please select an item to delete.") 
+    
+self = Tk()
+app = party_store_hire(self)
+self.mainloop()
