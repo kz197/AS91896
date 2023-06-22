@@ -1,0 +1,105 @@
+from tkinter import *
+from tkinter import messagebox
+
+class PartyHireStore:
+    def __init__(self, root):
+        self.root = root
+        self.root.title("cps")
+        
+        # Create labels
+        label_name = Label(root, text="Customer Name:")
+        label_name.grid(row=0, column=0, padx=5, pady=5, sticky=W)
+        
+        label_receipt = Label(root, text="Receipt Number:")
+        label_receipt.grid(row=1, column=0, padx=5, pady=5, sticky=W)
+        
+        label_item = Label(root, text="Item Hired:")
+        label_item.grid(row=2, column=0, padx=5, pady=5, sticky=W)
+        
+        label_quantity = Label(root, text="Quantity:")
+        label_quantity.grid(row=3, column=0, padx=5, pady=5, sticky=W)
+        
+        # Create entry fields
+        self.entry_name = Entry(root)
+        self.entry_name.grid(row=0, column=1, padx=5, pady=5)
+
+        #limits the inputs into the tkinter window
+        #it simply doesn't let you enter anything other than a letter
+        vcmd = (root.register(self.validate_name), "%P")
+        self.entry_name.config(validate="key", validatecommand=vcmd)
+
+       
+        
+        self.entry_receipt = Entry(root)
+        self.entry_receipt.grid(row=1, column=1, padx=5, pady=5)
+        
+        self.entry_item = Entry(root)
+        self.entry_item.grid(row=2, column=1, padx=5, pady=5)
+        
+        self.entry_quantity = Entry(root)
+        self.entry_quantity.grid(row=3, column=1, padx=5, pady=5)
+        vcmd_2 = (root.register(self.validate_quantity), "%P")
+        self.entry_quantity.config(validate="key", validatecommand=vcmd_2)
+        
+        # Create buttons
+        button_add = Button(root, text="Add Item", command=self.add_item)
+        button_add.grid(row=4, column=0, padx=5, pady=5)
+        
+        button_delete = Button(root, text="Delete Item", command=self.delete_item)
+        button_delete.grid(row=4, column=1, padx=5, pady=5)
+        
+        # Create a listbox to display items
+        self.listbox = Listbox(root, width=50)
+        self.listbox.grid(row=5, column=0, columnspan=10, padx=5, pady=5)
+
+    def validate_name(self, text):
+        return text.isalpha() or text == ""  
+      
+    def validate_quantity(self, text):
+        return text.isnumeric() or text == ""   
+    
+  
+        
+    
+
+    def close_window(self, window):
+        window.grab_release()  # Release modal state
+        window.destroy()
+
+    def add_item(self):
+        name = self.entry_name.get()
+        receipt = self.entry_receipt.get()
+        item = self.entry_item.get()
+        quantity = self.entry_quantity.get()
+        
+        if name and receipt and item and quantity:
+            item_details = f"{name} , Receipt: {receipt}, Item: {item}, Quantity: {quantity}"
+            self.listbox.insert(END, item_details)
+        else:
+            messagebox.showerror("Error", "Please fill in all the fields.")
+        
+    def delete_item(self):
+        selected_item = self.listbox.curselection()
+        
+        if selected_item:
+            self.listbox.delete(selected_item)
+        else:
+            messagebox.showerror("Error", "Please select an item to delete.")  
+
+
+root = Tk()
+app = PartyHireStore(root)
+root.mainloop()
+
+
+""" def open_new_window(self):
+        new_window = Toplevel(self.root)
+        new_window.title("New Window")
+        new_window.grab_set()"""
+"""button_open_new_window = Button(root, text="Open New Window", command=self.open_new_window)
+        button_open_new_window.grid(row=6, column=0, columnspan=2, padx=5, pady=5)"""
+        
+  
+"""
+    button_new = Button(new_window, text="Button in New Window", command=lambda: self.close_window(new_window))
+    button_new.pack(padx=10, pady=10)"""
