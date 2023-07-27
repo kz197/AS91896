@@ -1,0 +1,142 @@
+
+
+import tkinter 
+from tkinter import ttk
+from tkinter import *
+
+'''
+def search(event):
+    typed = search_entry.get()
+    if typed == "":
+        data = '''
+
+
+def validate_name( text):
+        return text.isalpha() or text == ""  
+
+def validate_quantity( text):
+        return text.isnumeric() or text == "" 
+
+
+
+
+def add():
+    global count
+    tree1.insert(parent= '', index= END, iid= count , text="ghost",values= (name_entry.get(),item_entry.get(),quantity_spinbox.get()))
+    count += 1 
+    name_entry.delete(0,END)
+    item_entry.delete(0,END)
+
+def delete():
+    x = tree1.selection()
+    for record in x:
+        tree1.delete(record)
+
+window = tkinter.Tk()
+
+mainwindow =  tkinter.Frame(window)
+mainwindow.pack()
+window.geometry("800x300")  # Set the size of the main window
+information_frame = tkinter.LabelFrame(mainwindow,text="user information ")
+information_frame.grid(row= 0, column= 0, sticky= NSEW)
+
+Name_label = tkinter.Label(information_frame, text = "first name")
+Name_label.grid( row= 1, column= 1,sticky= NSEW, padx= 20 , pady=10)
+
+
+name_var = tkinter.StringVar()
+name_entry =  tkinter.Entry(information_frame,textvariable=name_var)
+name_entry.grid(row= 1, column= 2,sticky= NSEW, padx= 20 , pady=10)
+vcmd_2 = (window.register(validate_name), "%P")
+name_entry.config(validate="key", validatecommand=vcmd_2)
+
+item_entry_label = tkinter.Label(information_frame, text="Hire Items")
+item_entry_label.grid(row= 2, column= 1 , sticky= NSEW )
+item_entry= ttk.Combobox(information_frame, values =  ["table", "chair","sound system"])
+item_entry.grid(row= 2, column= 2 ,sticky= NSEW, padx= 20 , pady=10)
+
+
+'''quantity_var = tkinter.StringVar()
+quantity_entry =  tkinter.Entry(information_frame, textvariable=quantity_var)
+quantity = tkinter.Label(information_frame, text="quantity")
+quantity_spinbox = tkinter.Spinbox(information_frame, from_=1 , to = 500 )
+quantity.grid(row=3 , column= 0,sticky= NSEW )
+quantity_spinbox.grid(row= 3,column=1,sticky= NSEW)
+vcmd_1 = (window.register(validate_quantity), "%P")
+quantity_entry.config(validate="key", validatecommand=vcmd_1)'''
+
+quantity_var = tkinter.StringVar()
+quantity_spinbox = tkinter.Spinbox(information_frame, from_=1, to=500, textvariable=quantity_var)
+quantity = tkinter.Label(information_frame, text="quantity")
+quantity.grid(row=3 , column=0, sticky=NSEW)
+quantity_spinbox.grid(row=3, column=1, sticky=NSEW)
+vcmd_1 = (window.register(validate_quantity), "%P")
+quantity_spinbox.config(validate="key", validatecommand=vcmd_1)
+
+
+
+
+
+
+information_entering = tkinter.LabelFrame(mainwindow,text="")
+information_entering.grid(row= 1, column= 0,sticky= NSEW)
+
+add_shit = tkinter.Button(information_frame, text="add stuff", command=add)
+add_shit.grid(row= 4,column=1,sticky= NSEW)
+
+remove =  tkinter.Button(information_frame, text = "remove",command = delete )
+remove.grid(row= 5,column=1,sticky= NSEW)
+
+
+'''search_label= tkinter.Label(information_frame,text = "search")
+search_label.grid(row= 3 , column = 3)
+search_entry = tkinter.Entry(information_frame, )
+search_entry.grid(row =3,column=4, sticky= E )
+search_entry.bind("<KeyRelease>", search)'''
+
+
+names = []
+hired_items = []
+item_hire_quantity= []
+
+
+
+
+tree1 = ttk.Treeview(window)
+tree1['columns'] = ("name", "hired_items", "quantity")  # Changed "Hired_Items" to "hired_items"
+
+# Set column configurations
+tree1.column("#0", width= 0,stretch=NO )
+tree1.column("name", anchor=W, width=110,minwidth=100)
+tree1.column("hired_items", anchor=CENTER, width=80,minwidth=100)  # Changed "Hired Items" to "hired_items"
+tree1.column("quantity", anchor=W, width=210,minwidth=100)
+
+# Set column headings
+tree1.heading("#0", text="", anchor=W)  # Changed "0" to "#0"
+tree1.heading("name", text="Name", anchor=W)
+tree1.heading("hired_items", text="Hired Items", anchor=W)  # Changed "Hired Items" to "hired_items"
+tree1.heading("quantity", text="Quantity", anchor=W)
+
+
+
+
+data= [
+    ["Larry", "chair",12],
+    
+]
+global count
+count = 0
+for record in data:
+    tree1.insert(parent= '', index= END, iid= count , text="ghost",values= (record[0],record[1],record[2]))
+    count += 1 
+
+tree1.pack(fill=BOTH, expand=True)
+
+
+window.mainloop()
+
+
+
+
+
+
